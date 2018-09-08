@@ -10,34 +10,34 @@ class App extends Component {
 		super(props);
 		this.state = {			
 			repos: []			
-		}
-		
-	};    
+		}		
+	};   
+
 	componentDidMount(){
 		fetch(apiUrl)
 			.then ((response)=>response.json())		
 			.then ((jsonData)=>{
-					console.log('elprimerCL', jsonData);
-					this.setState({
-					repos: jsonData					
+				console.log('App jsondata', jsonData);
+				this.setState({
+					repos: jsonData		//y de aquí no sale el estado
 				})							
-			});
-				
+			});console.log('estado1', this.state);				
 	};	
 	
 
 	render(){
+		
 		return (
 			<div>
+				<input type="text" placeholder="repositorio1"/>
 				<Search />
-				<RepoList />
-				
+				<RepoList />			
 			</div>
 		)
 	}
 }
 		
-console.log(this.props)
+console.log('App props',this.props)
 export default App;
 
 

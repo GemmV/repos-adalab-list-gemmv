@@ -5,8 +5,7 @@ class Search extends Component {
        
     render() { 
         return ( 
-            <Fragment>
-                <input type="text" placeholder="repositorio1"/>
+            <Fragment>                
                 <button>BUSCAR</button>
             </Fragment>
          );
