@@ -9,10 +9,10 @@ class Repo extends Component {
     render() { 
         return ( 
             <Fragment>
-            
+                <h1 className="character-name">{this.props.repos.name}</h1>
             </Fragment>
          );
     }
 }
- 
+ console.log(this.props)
 export default Repo;
