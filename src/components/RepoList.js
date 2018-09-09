@@ -1,23 +1,26 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import '../styles/RepoList.css';
 import Repo from './Repo'; //Repo es mi hija
 
 class RepoList extends Component {
-    
+        
     render() { 
-        console.log('RepoList props', this.props)
-
+        console.log('RepoList', this.props)
+        
         return ( 
-            <Fragment>
-                <main>
-                    <ul>
-                        <li>
-                            
-                            <Repo repos={this.props.repos}/>
-                        </li>           
-                    </ul>
-                </main>
-            </Fragment>
+            <ul>
+                {this.props.repos.filter(item=>{
+                    return item.name.toLowerCase();
+                    })                
+                .map(item=>{
+                    return (
+                        <li key={item.id}>
+                            <Repo item={item}/>
+                        </li>
+                    )
+                    })
+                }
+            </ul>            
          );
     }
 }

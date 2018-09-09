@@ -1,23 +1,20 @@
 import React, { Component, Fragment } from 'react';
 import '../styles/Repo.css';
 
-class Repo extends Component {
+class Repo extends Component {    
     
-    
-    render() { 
-        console.log('Repo props1', this.props)
-        const {name}=this.props;
-        const {description}=this.props; 
-        const {languages}=this.props;
+    render() {         
+        const {name}=this.props.item;
+        const {description}=this.props.item; 
+        const {language}=this.props.item;
         
         return ( 
             <Fragment>
                 <h1>{name}</h1>
                 <p>{description}</p>
-                <span>{languages}</span>
+                <span>{language}</span>
             </Fragment>
          );
     }
-}
-
+};
 export default Repo;

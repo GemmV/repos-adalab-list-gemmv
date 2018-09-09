@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import '../styles/App.css';
 import Search from './Search'; //Search es mi hija
 import RepoList from './RepoList'; //RepoList es mi hija
@@ -9,10 +9,14 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {			
-			repos: [],						
+			repos: [],
+			name:'',
+    		description:'',
+    		language:''									
 		}	
 		
 		this.getRepos=this.getRepos.bind(this);
+		this.searchByName=this.searchByName.bind.bind(this);
 	}  
 
 	componentDidMount(){
@@ -21,30 +25,30 @@ class App extends Component {
 	
 	getRepos(){
 		fetch(apiUrl)
-		.then ((response)=>response.json())		
+		.then ((response)=>{return response.json();})	
 		.then ((jsonData)=>{
-			console.log('App jsondata', jsonData);
-			let repos = [];
-			for (let i = 0; i < jsonData.length; i++){
-				repos[i] = {...jsonData[i]};
-			}
-			this.setState({
-				repos: repos 
-			});							
+			console.log('Appjsondata', jsonData);
+			this.setState({repos: jsonData});		
 		});	
 	}
 	
-	
+	searchByName(event){
+		const nameSearch = event.currentTarget.value.toLowerCase();
+		this.setState({name: nameSearch})
+	}
 
-	render(){
-		
+	render(){		
 		return (
-			<div>
-				<input type="text" placeholder="repositorio1"/>
-				<Search repos={this.state.repos}/>
-				<RepoList repos={this.state.repos}/>	
-					
-			</div>
+			<Fragment>
+				<Search searchByName={this.state.searchByName}/>				
+				<RepoList 
+					repos={this.state.repos}
+					searchByName={this.state.name}
+					name={this.state.name}
+        			description={this.state.description}
+       				language={this.state.language}		
+					/>						
+			</Fragment>
 		)
 	}
 }
