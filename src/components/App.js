@@ -17,6 +17,7 @@ class App extends Component {
 		
 		this.getRepos=this.getRepos.bind(this);
 		this.searchByName=this.searchByName.bind.bind(this);
+		this.selectLanguage=this.selectLanguage.bind.bind(this);
 	}  
 
 	componentDidMount(){
@@ -31,16 +32,28 @@ class App extends Component {
 			this.setState({repos: jsonData});		
 		});	
 	}
-	
+
 	searchByName(event){
-		const nameSearch = event.currentTarget.value.toLowerCase();
+		const nameSearch = event.currentTarget.value;
 		this.setState({name: nameSearch})
+	}
+
+	selectLanguage(event){
+		const languageSearch = event.currentTarget.value;
+		this.setState({language: languageSearch
+		})
 	}
 
 	render(){		
 		return (
 			<Fragment>
-				<Search searchByName={this.state.searchByName}/>				
+				<Search 
+					searchByName={this.state.searchByName}
+					selectLanguage={this.state.selectLanguage}
+					repos={this.state.repos}
+					description={this.state.description}
+					language={this.state.language}
+					/>				
 				<RepoList 
 					repos={this.state.repos}
 					searchByName={this.state.name}

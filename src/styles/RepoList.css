@@ -1,0 +1,11 @@
+.ulBox{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+
+}
+
+.liBox{
+    list-style: none;
+    width: 150px;
+    margin: 20px;
+}

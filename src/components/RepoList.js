@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import '../styles/RepoList.css';
 import Repo from './Repo'; //Repo es mi hija
 
@@ -8,13 +8,10 @@ class RepoList extends Component {
         console.log('RepoList', this.props)
         
         return ( 
-            <ul>
-                {this.props.repos.filter(item=>{
-                    return item.name.toLowerCase();
-                    })                
-                .map(item=>{
+            <ul className="ulBox">
+                {this.props.repos.map(item=>{
                     return (
-                        <li key={item.id}>
+                        <li className="liBox" key={item.id}>
                             <Repo item={item}/>
                         </li>
                     )
