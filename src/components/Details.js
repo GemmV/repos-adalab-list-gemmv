@@ -13,10 +13,10 @@ class Details extends Component {
         <div>
             <Link to='/'>                
                 <div>
-                    <h2>{this.props.name}</h2>
+                    <h2>{this.props.repos.name}</h2>
                     <p>{this.props.description}</p>
                     <p>{this.props.language}</p>                    
-                </div>
+                </div>Back
             </Link>
         </div>    
      );

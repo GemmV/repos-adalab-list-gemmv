@@ -32,7 +32,7 @@ class App extends Component {
 	}
 
 	handleRepos(event){
-		const inputValue = event.target.value
+		const inputValue = event.currentTarget.value.toLowerCase();
 		this.setState({input: inputValue});			
 	}
 
@@ -45,20 +45,16 @@ class App extends Component {
 		console.log('RenderRepos state', this.state)
 		return (
 			<div>
-				<Search 
-					reposAgain={this.state.repos}
-					onChangeHandler={this.handleRepos} 
+				<Search 									 
 					handleSelect={this.handleSelect}
-					handleRepos={this.handleRepos}				
+					handleRepos={this.handleRepos}								
 				/>
 				<Switch>
-				<Route exact path='/' render={props =>
-					<RepoList 
-						match={props.match}
-						reposAgain={this.state.repos}
+				<Route exact path='/' render={() =>
+					<RepoList 				
 						repos={this.state.repos}
-						handleSelect={this.state.handleSelect}
-						handleRepos={this.state.handleRepos}						
+						handleSelect={this.handleSelect}
+						handleRepos={this.handleRepos}						
 					/>}/>
 
 				<Route path='/Details/:id' component={Details} render={props => 

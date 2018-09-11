@@ -4,21 +4,21 @@ import '../styles/Search.css';
 class Search extends Component {
        
     render() {  
-        const {onChangeHandler} = this.props   
+        
         console.log( 'RenderSearch props', this.props)
         return ( 
             
             <div className="barBox">
                 <h1 className='maintitle'>Repos at Adalab in Github</h1>
 
-                <input type="text" onChange={onChangeHandler.handleRepos} placeholder="Buscar"/>   
+                <input type="text" id="f-title" name="f-title" onChange={this.props.handleRepos} placeholder="Buscar"/>   
 
-                <select className="searchBox" value={onChangeHandler.language} onChange={onChangeHandler.handleSelect}> 
+                <select className="searchBox" value={this.props.language} onChange={this.props.handleSelect}> 
                     <option value="default">Elige</option> 
                     <option value="CSS">CSS</option>
                     <option value="HTML">HTML</option>
                     <option value="Shell">Shell</option>
-                    <option value="JavaScript">JavaScript</option>                    
+                    <option value="JavaScript">JavaScript</option>                   
                 </select>
             </div>
          );

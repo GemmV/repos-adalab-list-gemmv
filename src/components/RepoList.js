@@ -1,35 +1,29 @@
 import React, { Component } from 'react';
 import '../styles/RepoList.css';
-import { Link } from 'react-router-dom';
 import Repo from './Repo'; //Repo es mi hija
 
 class RepoList extends Component {
        
-    render() {               
-        
-        const {reposAgain} = this.props;
-        console.log('renderRepoList props', reposAgain)
-
-        const filterOne = reposAgain.filter(item =>
-        item.name.toUpperCase().includes(this.props.handleRepos.toUpperCase()));
-        
-        // const filterTwo = filterOne.filter(item =>
-        // item.language.includes(this.props.handleSelect));
-        
-                
+    render() {                 
+              console.log('RepoList props',this.props)  
         return ( 
-            <ul className="divBox">            
-                {filterOne.map((repos, index)=>
-                    <li key={index}>
-                        <Link to={`/${repos.id}`}>
+            <ul className="divBox">     
+            {this.props.repos
+                .filter(item => {
+                    return item.name.toLowerCase().includes(this.props.handleRepos);
+                  })
+                .filter(item=>{
+                  if(this.props.language ===''){
+                    return true
+                  }else{
+                    return this.props.language === item.language
+                  }
+                })       
+                .map((item)=>
+                    <li key={item}>                       
                             <Repo
-                                name={repos.name}      
-                            />                         
-                        </Link>
-                        <Repo 
-                            language={repos.language}
-                            description={repos.description} 
-                        />
+                                item={item.id}                                     
+                            />                
                     </li>
                 )}         
             </ul>            

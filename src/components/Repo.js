@@ -6,14 +6,14 @@ import { Link } from 'react-router-dom';
 class Repo extends Component {    
     
     render() {         
-         const {name} = this.props;
+         
         
-        console.log('RenderRepo props', this.props)
+        console.log('RenderRepo props', this.props.item)
         
         return ( 
             <div>
-                <Link to={`/Detail/${this.props.id}`}>
-                <h2>{name}</h2>
+                <Link to={`/Detail/${this.props.item.id}`}>
+                <h2>{this.props.item.name}</h2>
                 </Link>                 
             </div>
          );
