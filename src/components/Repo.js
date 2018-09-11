@@ -1,19 +1,21 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import '../styles/Repo.css';
+import { Link } from 'react-router-dom';
+
 
 class Repo extends Component {    
     
     render() {         
-        const {name}=this.props.item;
-        const {description}=this.props.item; 
-        const {language}=this.props.item;
+         const {name} = this.props;
+        
+        console.log('RenderRepo props', this.props)
         
         return ( 
-            <Fragment>
-                <h1>{name}</h1>
-                <p>{description}</p>
-                <span>{language}</span>
-            </Fragment>
+            <div>
+                <Link to={`/Detail/${this.props.id}`}>
+                <h2>{name}</h2>
+                </Link>                 
+            </div>
          );
     }
 };

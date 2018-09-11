@@ -1,27 +1,26 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component} from 'react';
 import '../styles/Search.css';
 
 class Search extends Component {
        
-    render() {     
+    render() {  
+        const {onChangeHandler} = this.props   
+        console.log( 'RenderSearch props', this.props)
         return ( 
-            <Fragment>
+            
             <div className="barBox">
                 <h1 className='maintitle'>Repos at Adalab in Github</h1>
-                <input type="text" onChange={this.props.repos.searchByName} placeholder="escribe aquí"/>   
 
-                <select className="searchBox" id={this.props.repos.id} onChange={this.props.repos.selectLanguage} value={this.props.repos.language}> 
-                    {this.props.repos.filter(item=>{     
-                        return this.props.repos.language === item.language})
-                    }       
+                <input type="text" onChange={onChangeHandler.handleRepos} placeholder="Buscar"/>   
+
+                <select className="searchBox" value={onChangeHandler.language} onChange={onChangeHandler.handleSelect}> 
                     <option value="default">Elige</option> 
                     <option value="CSS">CSS</option>
                     <option value="HTML">HTML</option>
-                    <option value="2">Shell</option>
-                    <option value="3">JavaScript</option>                    
+                    <option value="Shell">Shell</option>
+                    <option value="JavaScript">JavaScript</option>                    
                 </select>
             </div>
-            </Fragment> //hacer otro option con value={this.props.repos.language}
          );
     }
 }

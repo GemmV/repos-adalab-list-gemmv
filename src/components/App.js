@@ -1,5 +1,7 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import '../styles/App.css';
+import { Route, Switch } from 'react-router-dom';
+import Details from './Details'; //Details es mi hija
 import Search from './Search'; //Search es mi hija
 import RepoList from './RepoList'; //RepoList es mi hija
 
@@ -10,14 +12,11 @@ class App extends Component {
 		super(props);
 		this.state = {			
 			repos: [],
-			name:'',
-    		description:'',
-    		language:''									
-		}	
-		
-		this.getRepos=this.getRepos.bind(this);
-		this.searchByName=this.searchByName.bind.bind(this);
-		this.selectLanguage=this.selectLanguage.bind.bind(this);
+			input: '',
+			select: '',		
+		}					
+		this.handleRepos=this.handleRepos.bind(this);
+		this.handleSelect=this.handleSelect.bind(this);		
 	}  
 
 	componentDidMount(){
@@ -27,41 +26,48 @@ class App extends Component {
 	getRepos(){
 		fetch(apiUrl)
 		.then ((response)=>{return response.json();})	
-		.then ((jsonData)=>{
-			console.log('Appjsondata', jsonData);
+		.then ((jsonData)=>{			
 			this.setState({repos: jsonData});		
 		});	
 	}
 
-	searchByName(event){
-		const nameSearch = event.currentTarget.value;
-		this.setState({name: nameSearch})
+	handleRepos(event){
+		const inputValue = event.target.value
+		this.setState({input: inputValue});			
 	}
 
-	selectLanguage(event){
-		const languageSearch = event.currentTarget.value;
-		this.setState({language: languageSearch
-		})
+	handleSelect(event){
+		const selectValue = event.target.value
+		this.setState({select: selectValue});
 	}
 
-	render(){		
+	render(){	
+		console.log('RenderRepos state', this.state)
 		return (
-			<Fragment>
+			<div>
 				<Search 
-					searchByName={this.state.searchByName}
-					selectLanguage={this.state.selectLanguage}
-					repos={this.state.repos}
-					description={this.state.description}
-					language={this.state.language}
-					/>				
-				<RepoList 
-					repos={this.state.repos}
-					searchByName={this.state.name}
-					name={this.state.name}
-        			description={this.state.description}
-       				language={this.state.language}		
-					/>						
-			</Fragment>
+					reposAgain={this.state.repos}
+					onChangeHandler={this.handleRepos} 
+					handleSelect={this.handleSelect}
+					handleRepos={this.handleRepos}				
+				/>
+				<Switch>
+				<Route exact path='/' render={props =>
+					<RepoList 
+						match={props.match}
+						reposAgain={this.state.repos}
+						repos={this.state.repos}
+						handleSelect={this.state.handleSelect}
+						handleRepos={this.state.handleRepos}						
+					/>}/>
+
+				<Route path='/Details/:id' component={Details} render={props => 
+					<Details 
+						match={props.match} 
+						repos={this.state.repos}						
+					/>}/>
+				</Switch>						
+			</div>
 		)
 	}
 }
