@@ -8,14 +8,15 @@ class Details extends Component {
 	}
    
     render() { 
-        
+        const {name, description, select} = this.props.repos.find(i => i.id === parseInt(this.props.match.params.id));
+
         return (         
         <div>
             <Link to='/'>                
                 <div>
-                    <h2>{this.props.repos.name}</h2>
-                    <p>{this.props.description}</p>
-                    <p>{this.props.language}</p>                    
+                    <h2>{name}</h2>
+                    <p>{description}</p>
+                    <p>{select}</p>                    
                 </div>Back
             </Link>
         </div>    
