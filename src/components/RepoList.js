@@ -20,7 +20,8 @@ class RepoList extends Component {
                     }
                     })       
                     .map(item => {
-                        <li key={item.id}>                        <Repo
+                        <li key={item.id}>                        
+                            <Repo
                                 item={item} 
                                         
                             />     
